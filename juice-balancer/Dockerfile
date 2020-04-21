@@ -22,5 +22,6 @@ COPY --from=ui --chown=app:app /home/app/build/ ./public/
 COPY --chown=app:app ./src src/
 USER app
 EXPOSE 8080
+EXPOSE 3000
 ENV NODE_ENV ${NODE_ENV:-production}
 CMD ["node", "/home/app/src/index.js"]

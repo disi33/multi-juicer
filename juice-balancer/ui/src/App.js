@@ -12,6 +12,8 @@ import { Layout } from './Layout';
 import { Spinner } from './Spinner';
 import { Footer } from './Footer';
 
+const { get } = require('./config');
+
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 
 for (const translation of translations) {
@@ -29,6 +31,8 @@ const LoadingPage = () => <Spinner />;
 function App() {
   const [locale, setLocale] = useState('en');
   const [messages, setMessages] = useState({});
+  const basePathValue = get('basePath');
+  const basePath = basePathValue === '' ? "/balancer" : basePathValue + "/balancer";
 
   const navigatorLocale = navigator.language;
   useEffect(() => {
@@ -45,7 +49,7 @@ function App() {
   return (
     <IntlProvider defaultLocale="en" locale={locale} messages={messages}>
       <>
-        <Router basename="/balancer">
+        <Router basename={basePath}>
           <Layout footer={<Footer selectedLocale={locale} switchLanguage={switchLanguage} />}>
             <Suspense fallback={<LoadingPage />}>
               <Switch>

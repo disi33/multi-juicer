@@ -1,7 +1,18 @@
 const { get } = require('./config');
 const { logger } = require('./logger');
 
-const app = require('./app.js');
+var app = require('./app.js');
+
+const basePath = get("basePath");
+if(basePath !== '')
+{
+  var express = require('express'),
+      newApp = express();
+
+  newApp.use(basePath, app);
+
+  app = newApp;
+}
 
 const server = app.listen(get('port'), () =>
   logger.info(`JuiceBalancer listening on port ${get('port')}!`)

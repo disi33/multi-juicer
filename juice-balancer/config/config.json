@@ -1,5 +1,6 @@
 {
   "port": 3000,
+  "basePath": "/juice",
   "namespace": "default",
   "deploymentContext": "multi-juicer",
   "maxJuiceShopInstances": 10,
